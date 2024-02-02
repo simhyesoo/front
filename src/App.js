@@ -9,7 +9,6 @@ function App() {
   const { data, getData, postData, action, putData, deleteData, status } = useStore();
   useEffect(() => { getData() }, [])
 
-  if (!status) return <>Loading...</>  //데이터가 들어오지 않을 때의 상태 
   // console.log(data);
   const onSaveHandler = () => {
 
@@ -38,6 +37,7 @@ function App() {
     // console.log("id =", id)
     deleteData(id);
   }
+
   return (
     <div className="App">
       <article>
@@ -51,14 +51,17 @@ function App() {
 
 
         <ul>
+          {data.length == 0 ? '데이터가 없어용' : ''}
           {
-            data.map((item) => {
-              return <li key={item.id}>
-                {item.name}
-                <button onClick={() => { setType(false); setId(item.id) }}>수정</button>
-                <button onClick={() => { onDeleteHandler(item.id) }}>삭제</button>
-              </li>
-            })
+            (!status) ? '로딩중...'
+              :
+              data.map((item) => {
+                return <li key={item.id}>
+                  {item.name}
+                  <button onClick={() => { setType(false); setId(item.id) }}>수정</button>
+                  <button onClick={() => { onDeleteHandler(item.id) }}>삭제</button>
+                </li>
+              })
           }
         </ul>
       </article>

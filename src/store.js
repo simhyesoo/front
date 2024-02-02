@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const request = axios.create({
     baseURL: process.env.REACT_APP_baseURL,
-    timeout: 1000
+    timeout: 5000
 });
 
 export const useStore = create((set) => {
